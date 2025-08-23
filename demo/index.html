@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventBus Interactive Demo - lever-ui-eventbus</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="logo">
+                <span class="logo-icon">⚡</span>
+                lever-ui-eventbus
+            </h1>
+            <p class="tagline">Minimal TypeScript Event Bus - Zero Dependencies</p>
+            <div class="stats">
+                <span class="stat">📦 7KB</span>
+                <span class="stat">🎯 Type-Safe</span>
+                <span class="stat">🚀 Universal</span>
+            </div>
+            <div class="hero-actions">
+                <a href="https://github.com/lever-ui/lever-ui-eventbus" class="btn btn-primary" target="_blank">
+                    View on GitHub
+                </a>
+                <a href="#demo" class="btn btn-secondary">Try Demo ↓</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Demo Section -->
+    <main class="demo-section" id="demo">
+        <div class="container">
+            <h2 class="section-title">Interactive Playground</h2>
+            <p class="section-subtitle">
+                Click the buttons below to publish events and watch the real-time subscribers react
+            </p>
+
+            <!-- Demo Grid -->
+            <div class="demo-grid">
+                <!-- Publishers Column -->
+                <div class="demo-card">
+                    <h3 class="card-title">
+                        <span class="icon">📤</span>
+                        Event Publishers
+                    </h3>
+                    <div class="publisher-section">
+                        <h4>User Authentication</h4>
+                        <div class="button-group">
+                            <button id="login-btn" class="btn btn-success">
+                                👤 Login User
+                            </button>
+                            <button id="logout-btn" class="btn btn-outline">
+                                🚪 Logout
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="publisher-section">
+                        <h4>Shopping Cart</h4>
+                        <div class="button-group">
+                            <button id="add-item-btn" class="btn btn-primary">
+                                🛒 Add to Cart
+                            </button>
+                            <button id="remove-item-btn" class="btn btn-outline">
+                                ❌ Remove Item
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="publisher-section">
+                        <h4>Orders & Errors</h4>
+                        <div class="button-group">
+                            <button id="place-order-btn" class="btn btn-accent">
+                                📦 Place Order
+                            </button>
+                            <button id="error-btn" class="btn btn-danger">
+                                ⚠️ Simulate Error
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="publisher-section">
+                        <h4>Custom Event</h4>
+                        <div class="custom-event">
+                            <input type="text" id="custom-message" placeholder="Enter message..." class="input">
+                            <button id="custom-btn" class="btn btn-secondary">
+                                🎯 Send Custom
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Log Column -->
+                <div class="demo-card">
+                    <h3 class="card-title">
+                        <span class="icon">📋</span>
+                        Live Event Log
+                        <button id="clear-log-btn" class="btn-small btn-outline">Clear</button>
+                    </h3>
+                    <div class="event-log" id="event-log">
+                        <div class="log-placeholder">
+                            Events will appear here as they're published...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscribers Column -->
+                <div class="demo-card">
+                    <h3 class="card-title">
+                        <span class="icon">📥</span>
+                        Live Subscribers
+                    </h3>
+                    
+                    <div class="subscriber-widget">
+                        <h4>👤 User Status</h4>
+                        <div class="status-display" id="user-status">
+                            <div class="status-badge status-offline">Logged Out</div>
+                            <div class="user-info" id="user-info"></div>
+                        </div>
+                    </div>
+
+                    <div class="subscriber-widget">
+                        <h4>🛒 Cart Summary</h4>
+                        <div class="cart-summary" id="cart-summary">
+                            <div class="cart-stat">
+                                <span class="label">Items:</span>
+                                <span class="value" id="cart-items">0</span>
+                            </div>
+                            <div class="cart-stat">
+                                <span class="label">Total:</span>
+                                <span class="value" id="cart-total">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subscriber-widget">
+                        <h4>📊 Activity Counters</h4>
+                        <div class="counters">
+                            <div class="counter">
+                                <div class="counter-value" id="login-count">0</div>
+                                <div class="counter-label">Logins</div>
+                            </div>
+                            <div class="counter">
+                                <div class="counter-value" id="order-count">0</div>
+                                <div class="counter-label">Orders</div>
+                            </div>
+                            <div class="counter">
+                                <div class="counter-value" id="error-count">0</div>
+                                <div class="counter-label">Errors</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subscriber-widget">
+                        <h4>🔥 Event Frequency</h4>
+                        <div class="frequency-chart" id="frequency-chart">
+                            <div class="chart-bars" id="chart-bars"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Code Examples Section -->
+    <section class="code-section">
+        <div class="container">
+            <h2 class="section-title">Code Examples</h2>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="basic">Basic Usage</button>
+                    <button class="tab-btn" data-tab="polymorphic">Polymorphic</button>
+                    <button class="tab-btn" data-tab="async">Async Bus</button>
+                    <button class="tab-btn" data-tab="errors">Error Handling</button>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="basic-tab">
+                        <pre><code class="language-typescript">import { EventBus } from 'lever-ui-eventbus';
+
+// Define event classes
+class UserLoggedIn {
+  constructor(public userId: string, public email: string) {}
+}
+
+class ItemAddedToCart {
+  constructor(public itemId: string, public name: string, public price: number) {}
+}
+
+// Create event bus instance
+const bus = new EventBus();
+
+// Subscribe to events with type-safe handlers
+bus.subscribe(UserLoggedIn, (event) => {
+  console.log(`Welcome ${event.email}!`);
+  updateUserUI(event.userId);
+});
+
+bus.subscribe(ItemAddedToCart, (event) => {
+  console.log(`Added ${event.name} ($${event.price})`);
+  updateCartTotal();
+});
+
+// Post events - subscribers will be notified immediately
+bus.post(new UserLoggedIn('123', 'alice@example.com'));
+bus.post(new ItemAddedToCart('item-1', 'MacBook Pro', 2499.99));</code></pre>
+                    </div>
+
+                    <div class="tab-pane" id="polymorphic-tab">
+                        <pre><code class="language-typescript">// Polymorphic event handling - base classes can handle derived events
+abstract class OrderEvent {
+  constructor(public orderId: string, public timestamp = Date.now()) {}
+}
+
+class OrderPlaced extends OrderEvent {
+  constructor(orderId: string, public amount: number, public items: string[]) {
+    super(orderId);
+  }
+}
+
+class OrderCancelled extends OrderEvent {
+  constructor(orderId: string, public reason: string) {
+    super(orderId);
+  }
+}
+
+class OrderShipped extends OrderEvent {
+  constructor(orderId: string, public trackingNumber: string) {
+    super(orderId);
+  }
+}
+
+// Base handler receives ALL order events (placed, cancelled, shipped)
+bus.subscribe(OrderEvent, (event) => {
+  console.log(`Order ${event.orderId} event at ${new Date(event.timestamp)}`);
+  logOrderActivity(event);
+});
+
+// Specific handlers for specialized behavior
+bus.subscribe(OrderPlaced, (event) => {
+  console.log(`💰 Order placed: $${event.amount} (${event.items.length} items)`);
+  sendConfirmationEmail(event);
+});
+
+bus.subscribe(OrderShipped, (event) => {
+  console.log(`📦 Order shipped with tracking: ${event.trackingNumber}`);
+  notifyCustomer(event);
+});
+
+// This triggers BOTH the OrderEvent and OrderPlaced handlers
+bus.post(new OrderPlaced('ORD-456', 299.99, ['iPhone Case', 'Screen Protector']));</code></pre>
+                    </div>
+
+                    <div class="tab-pane" id="async-tab">
+                        <pre><code class="language-typescript">import { AsyncEventBus } from 'lever-ui-eventbus';
+
+// Async event bus for non-blocking event delivery
+const asyncBus = new AsyncEventBus((task) => {
+  // Custom executor - could use setTimeout, queueMicrotask, or Worker
+  setTimeout(task, 0); // Deliver events on next tick
+});
+
+// Or use built-in executors
+const microtaskBus = new AsyncEventBus(); // Uses queueMicrotask by default
+
+// Handlers execute asynchronously
+asyncBus.subscribe(UserLoggedIn, (event) => {
+  console.log('Async handler 1:', event.email);
+  performExpensiveOperation(event);
+});
+
+asyncBus.subscribe(UserLoggedIn, (event) => {
+  console.log('Async handler 2:', event.email);
+  updateAnalytics(event);
+});
+
+// Post event and continue - handlers run later
+console.log('About to post event');
+asyncBus.post(new UserLoggedIn('789', 'bob@example.com'));
+console.log('Event posted - this logs BEFORE handlers execute!');
+
+// Great for UI updates, API calls, or heavy computations
+// that shouldn't block the main execution thread</code></pre>
+                    </div>
+
+                    <div class="tab-pane" id="errors-tab">
+                        <pre><code class="language-typescript">import { DeadEvent } from 'lever-ui-eventbus';
+
+// Handle events that have no subscribers
+bus.subscribe(DeadEvent, (deadEvent) => {
+  console.warn('⚠️ Unhandled event type:', deadEvent.event.constructor.name);
+  console.log('Event data:', deadEvent.event);
+  // Log to monitoring service, fallback handling, etc.
+});
+
+// Custom error handling for failed subscribers
+const errorHandler = (error, context) => {
+  console.error(`💥 Handler crashed for ${context.eventType.name}:`, error.message);
+  // Send to error reporting service
+  reportError(error, context);
+};
+
+const robustBus = new EventBus(errorHandler);
+
+// Even if one handler crashes, others still execute
+robustBus.subscribe(UserLoggedIn, (event) => {
+  updateUserProfile(event); // This works fine
+});
+
+robustBus.subscribe(UserLoggedIn, (event) => {
+  throw new Error('Database connection failed!'); // This crashes but is handled
+});
+
+robustBus.subscribe(UserLoggedIn, (event) => {
+  sendWelcomeEmail(event); // This still executes!
+});
+
+// All handlers run, crashed one is reported via errorHandler
+robustBus.post(new UserLoggedIn('999', 'test@example.com'));
+
+// Post event with no subscribers - triggers DeadEvent
+class UnknownEvent {}
+bus.post(new UnknownEvent()); // Creates DeadEvent</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>
+                Built with ❤️ using lever-ui-eventbus • 
+                <a href="https://github.com/lever-ui/lever-ui-eventbus" target="_blank">View Source</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../dist/index.js" type="module"></script>
+    <script src="demo.js" type="module"></script>
+</body>
+</html>

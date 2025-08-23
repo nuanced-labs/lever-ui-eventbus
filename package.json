@@ -1,0 +1,100 @@
+{
+  "name": "@nuanced-labs/lever-ui-eventbus",
+  "version": "0.1.0",
+  "description": "A minimal TypeScript event bus: subscribe(Class, handler), async delivery, dead events, and polymorphic dispatch.",
+  "keywords": [
+    "eventbus",
+    "pubsub",
+    "typescript",
+    "event",
+    "async",
+    "react",
+    "hooks",
+    "type-safe",
+    "polymorphic",
+    "zero-dependencies"
+  ],
+  "author": "Lever UI Team",
+  "homepage": "https://github.com/nuanced-labs/lever-ui-eventbus#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nuanced-labs/lever-ui-eventbus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nuanced-labs/lever-ui-eventbus/issues"
+  },
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js",
+      "require": "./dist/react.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run typecheck && npm run lint && npm run test && npm run build:bundle && npm run build:types && npm run build:demo",
+    "build:bundle": "tsup",
+    "build:types": "npm run build:types:core && npm run build:types:react",
+    "build:types:core": "tsc --project tsconfig.json --declaration --emitDeclarationOnly --outDir dist/types/core",
+    "build:types:react": "tsc --project tsconfig.react.json && npm run build:types:react:bundle",
+    "build:types:react:bundle": "node scripts/bundle-react-types.js",
+    "build:demo": "cp -r dist demo/",
+    "clean": "rimraf dist demo/dist",
+    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
+    "demo": "npm run build:bundle && npm run build:demo && echo 'Demo files updated! Now run: npx http-server demo -p 8000'",
+    "lint": "eslint src/**/*.ts src/**/*.tsx test/**/*.ts test/**/*.tsx",
+    "lint:fix": "eslint src/**/*.ts src/**/*.tsx test/**/*.ts test/**/*.tsx --fix",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "size": "npm run build && bundlesize"
+  },
+  "bundlesize": [
+    {
+      "path": "dist/index.js",
+      "maxSize": "8kb"
+    },
+    {
+      "path": "dist/react.js", 
+      "maxSize": "12kb"
+    }
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.7",
+    "@typescript-eslint/eslint-plugin": "^8.40.0",
+    "@typescript-eslint/parser": "^8.40.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "eslint": "^9.34.0",
+    "jsdom": "^26.1.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "rimraf": "^6.0.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  }
+}

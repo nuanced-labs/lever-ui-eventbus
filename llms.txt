@@ -1,0 +1,31 @@
+# lever-ui-eventbus
+
+> A minimal TypeScript event bus with zero dependencies featuring type-safe subscriptions, polymorphic dispatch, async delivery, dead event handling, and React integration.
+
+## Core Documentation
+- [README.md](README.md): Complete library documentation with installation, usage, and API reference
+- [src/event-bus.ts](src/event-bus.ts): Core EventBus implementation with comprehensive JSDoc documentation
+- [src/async-event-bus.ts](src/async-event-bus.ts): AsyncEventBus for non-blocking event delivery
+- [src/types.ts](src/types.ts): TypeScript type definitions and interfaces
+- [src/dead-event.ts](src/dead-event.ts): DeadEvent class for handling undelivered events
+
+## React Integration
+- [src/integrations/react/context.tsx](src/integrations/react/context.tsx): React context provider and useEventBus hook
+- [src/integrations/react/hooks.ts](src/integrations/react/hooks.ts): Complete React hooks for event bus integration
+- [src/integrations/react/index.ts](src/integrations/react/index.ts): React integration exports
+
+## Examples and Usage Patterns
+- [demo/demo.js](demo/demo.js): Comprehensive interactive demo showing all EventBus features
+- [demo/README.md](demo/README.md): Demo documentation with usage workflows and implementation details
+- [test/event-bus.test.ts](test/event-bus.test.ts): Core EventBus test suite with usage examples
+- [test/integrations/react/hooks.test.tsx](test/integrations/react/hooks.test.tsx): React hooks test examples
+
+## Testing and Development
+- [test/](test/): Complete test suite with 57 tests covering all features
+- [vitest.config.ts](vitest.config.ts): Test configuration with coverage thresholds
+- [package.json](package.json): Build scripts, dependencies, and package configuration
+- [tsup.config.ts](tsup.config.ts): Build configuration for ESM/CJS dual exports
+
+## Project Information
+- [CHANGELOG.md](CHANGELOG.md): Version history and feature documentation
+- [LICENSE](LICENSE): MIT license terms
