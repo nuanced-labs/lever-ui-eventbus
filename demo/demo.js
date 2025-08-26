@@ -1,5 +1,5 @@
-// Import EventBus from the built distribution
-import { EventBus } from '../dist/index.js';
+// Import EventBus from unpkg CDN
+import { EventBus } from 'https://unpkg.com/lever-ui-eventbus@latest/dist/index.js';
 
 // Define event classes for the demo
 class UserLoggedIn {
