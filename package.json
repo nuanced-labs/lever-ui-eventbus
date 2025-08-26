@@ -1,6 +1,6 @@
 {
   "name": "lever-ui-eventbus",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A minimal TypeScript event bus: subscribe(Class, handler), async delivery, dead events, and polymorphic dispatch.",
   "keywords": [
     "eventbus",
