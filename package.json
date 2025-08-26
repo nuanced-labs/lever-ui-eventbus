@@ -1,5 +1,5 @@
 {
-  "name": "@nuanced-labs/lever-ui-eventbus",
+  "name": "lever-ui-eventbus",
   "version": "0.1.0",
   "description": "A minimal TypeScript event bus: subscribe(Class, handler), async delivery, dead events, and polymorphic dispatch.",
   "keywords": [
